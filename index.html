@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Info</title>
+    <link rel="stylesheet" href="./style.css">
+    <script src="./index.js"></script>
+</head>
+
+<body>
+    <h1>Patient Information</h1>
+
+    <h2>Insert Patient</h2>
+    <input type="text" id="name" placeholder="Name" required>
+    <input type="date" id="dob" placeholder="Date Of Birth" required>
+    <button onclick="insertPatient()">Insert Patient</button>
+
+    <h2>Execute SQL Query</h2>
+    <textarea id="sqlQuery" placeholder="Enter SQL Query (SELECT or INSERT)" rows="4"></textarea>
+    <button onclick="executeQuery()">Execute Query</button>
+
+    <h2>Response</h2>
+    <pre id="response"></pre>
+</body>
+
+</html>
