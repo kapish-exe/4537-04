@@ -1,9 +1,12 @@
 async function insertPatient() {
-    const name = document.getElementById('name').value;
-    const dob = document.getElementById('dob').value;
 
     // Construct SQL query
-    const sql = `INSERT INTO Patient (name, dateOfbirth) VALUES ('${name}', '${dob}')`; // Ensure the correct column name in the SQL statement
+    const sql = `INSERT INTO Patient (name, date_of_birth) VALUES 
+    ('Sara Brown', '1990-01-01'),
+    ('John Smith', '1941-01-01'),
+    ('Jack Ma', '1961-01-30'),
+    ('Elon Musk', '1999-01-01')
+    `; 
     console.log(sql);
 
     // Call executeQuery to handle the insertion
@@ -16,7 +19,7 @@ async function insertPatient() {
     });
 
     const result = await response.json();
-    displayData(result); // Display the response from the server
+    displayData(result, sql); // Display the response from the server
 }
 
 async function executeQuery() {
@@ -42,14 +45,13 @@ async function executeQuery() {
         },
         body: body // Only include body for POST requests
     });
-
     const result = await response.json();
-    displayData(result);
+    displayData(result, query);
 }
 
 
 
-function displayData(result) {
+function displayData(result, query) {
     const responseDiv = document.getElementById('response');
     responseDiv.innerHTML = ''; // Clear previous response
 
@@ -59,15 +61,15 @@ function displayData(result) {
             let table = '<table><tr><th>Patient ID</th><th>Name</th><th>Date of Birth</th></tr>';
             result.data.forEach(patient => {
                 table += `<tr>
-                            <td>${patient.patientid}</td>
+                            <td>${patient.patient_id}</td>
                             <td>${patient.name}</td>
-                            <td>${new Date(patient.dateOfBirth).toLocaleDateString()}</td>
+                            <td>${new Date(patient.date_of_birth).toLocaleDateString()}</td>
                                 </tr>`;
             });
             table += '</table>';
             responseDiv.innerHTML = table;
         } else {
-            responseDiv.innerHTML = 'Query Successful';
+            responseDiv.innerHTML = `Query Successful: ${query}`;
         }
     } else {
         // If not successful, display the error message
